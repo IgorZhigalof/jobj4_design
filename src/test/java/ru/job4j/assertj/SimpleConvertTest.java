@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SimpleConvertTest {
@@ -51,7 +50,7 @@ class SimpleConvertTest {
     }
 
     @Test
-    void whenToMap(){
+    void whenToMap() {
         SimpleConvert simpleConvert = new SimpleConvert();
         Map<String, Integer> result = simpleConvert.toMap("0", "1", "2");
         assertThat(result)
