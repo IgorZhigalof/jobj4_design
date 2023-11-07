@@ -6,8 +6,11 @@ import java.util.List;
 
 public class Balancer {
     public static void split(List<ArrayList<Integer>> nodes, Iterator<Integer> source) {
-        CyclicIterator<ArrayList<Integer>> iterator = new CyclicIterator<>(nodes);
+        Iterator<ArrayList<Integer>> iterator = nodes.iterator();
         while (source.hasNext()) {
+            if (!iterator.hasNext()) {
+                iterator = nodes.iterator();
+            }
             iterator.next().add(source.next());
         }
     }
