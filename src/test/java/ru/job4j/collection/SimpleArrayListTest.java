@@ -13,7 +13,6 @@ import java.util.stream.IntStream;
 class SimpleArrayListTest {
 
     private SimpleList<Integer> list;
-
     @BeforeEach
     void initData() {
         list = new SimpleArrayList<>(3);
