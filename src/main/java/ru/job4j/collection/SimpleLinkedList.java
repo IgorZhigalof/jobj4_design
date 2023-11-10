@@ -10,22 +10,18 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
     private int modCount;
     private Node<E> head;
 
-    private Node<E> node(int index) {
-        Node<E> currentNode = head;
-        for (int i = 0; i < index; i++) {
-            currentNode = currentNode.next;
-        }
-        return currentNode;
-    }
-
     @Override
     public void add(E value) {
         modCount++;
         if (size == 0) {
             head = new Node<>(value, null);
         } else {
-            Node<E> node = node(size - 1);
-            node.next = new Node<>(value, null);
+            Node<E> currentNode = head;
+            int bound = size - 1;
+            for (int i = 0; i < bound; i++) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = new Node<>(value, null);
         }
         size++;
     }
