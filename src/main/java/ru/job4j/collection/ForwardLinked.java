@@ -10,6 +10,10 @@ public class ForwardLinked<E> implements SimpleLinked<E>, Iterable<E> {
     private int modCount;
     private Node<E> head;
 
+    public void addFirst(E value) {
+        head = new Node<>(value, head);
+    }
+
     @Override
     public void add(E value) {
         modCount++;
