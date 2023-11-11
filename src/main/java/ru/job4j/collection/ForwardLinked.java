@@ -12,6 +12,7 @@ public class ForwardLinked<E> implements SimpleLinked<E>, Iterable<E> {
 
     public void addFirst(E value) {
         head = new Node<>(value, head);
+        size++;
     }
 
     @Override
