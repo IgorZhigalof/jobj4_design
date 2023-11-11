@@ -29,11 +29,11 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        Iterator<E> iterator = iterator();
+        Node<E> node = head;
         for (int i = 0; i < index; i++) {
-            iterator.next();
+            node = node.next;
         }
-        return iterator.next();
+        return node.item;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
                 if (startModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return !Objects.isNull(currentNode);
+                return Objects.nonNull(currentNode);
             }
 
             @Override
