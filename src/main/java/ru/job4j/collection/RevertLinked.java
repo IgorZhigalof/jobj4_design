@@ -21,17 +21,18 @@ public class RevertLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (Objects.isNull(head) || Objects.isNull(head.next)) {
-            return false;
+        boolean result = false;
+        if (!(Objects.isNull(head) || Objects.isNull(head.next))) {
+            Node<T> supNode = head.next;
+            while (Objects.nonNull(supNode)) {
+                Node<T> node = supNode;
+                supNode = node.next;
+                node.next = head;
+                head = node;
+            }
+            result = true;
         }
-        Node<T> supNode = head.next;
-        while (Objects.nonNull(supNode)) {
-            Node<T> node = supNode;
-            supNode = node.next;
-            node.next = head;
-            head = node;
-        }
-        return true;
+        return result;
     }
 
     @Override
