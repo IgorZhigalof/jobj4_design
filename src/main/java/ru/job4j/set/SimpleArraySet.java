@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class SimpleArraySet<T> implements SimpleSet<T> {
-
     private SimpleArrayList<T> set = new SimpleArrayList<>(0);
 
     @Override
