@@ -58,16 +58,15 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private boolean isValueExist(MapEntry<K, V> mapEntry, K key) {
-        if (Objects.isNull(mapEntry)) {
-            return false;
+        boolean result = false;
+        if (Objects.nonNull(mapEntry)) {
+            if (Objects.hashCode(mapEntry.key) == Objects.hashCode(key)) {
+                if (Objects.equals(mapEntry.key, key)) {
+                    result = true;
+                }
+            }
         }
-        if (Objects.hashCode(mapEntry.key) != Objects.hashCode(key)) {
-            return false;
-        }
-        if (!Objects.equals(mapEntry.key, key)) {
-            return false;
-        }
-        return true;
+        return result;
     }
 
     @Override
