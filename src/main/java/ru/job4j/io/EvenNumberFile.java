@@ -1,7 +1,7 @@
 package ru.job4j.io;
 
 import java.io.FileInputStream;
-import java.util.Objects;
+import java.io.IOException;
 
 public class EvenNumberFile {
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class EvenNumberFile {
             while ((read = in.read()) != -1) {
                 text.append((char) read);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         String[] content = text.toString().split(System.lineSeparator());
