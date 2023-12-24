@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Analysis {
-
     public void unavailable(String source, String target) {
         writeToFile(
                 analyzeData(
