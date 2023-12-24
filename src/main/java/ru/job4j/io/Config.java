@@ -37,13 +37,13 @@ public class Config {
     private void isCorrect(String content) {
         String[] split = content.split("=");
         if (!content.contains("=")) {
-            throw new IllegalArgumentException("Missing equals in the line");
+            throw new IllegalArgumentException("Missing equals in a line");
         }
         if (split[0].isEmpty()) {
-            throw new IllegalArgumentException("Missing a key in the line");
+            throw new IllegalArgumentException("Missing a key in a line");
         }
-        if (split[1].isEmpty() && split.length == 2) {
-            throw new IllegalArgumentException("Missing a value in the line");
+        if (split.length < 2) {
+            throw new IllegalArgumentException("Missing a value in a line");
         }
     }
 
