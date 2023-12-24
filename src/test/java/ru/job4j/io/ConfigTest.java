@@ -27,7 +27,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Missing a key in the line");
+                .hasMessageContaining("Missing a key in a line");
     }
 
     @Test
@@ -36,7 +36,7 @@ class ConfigTest {
         Config config = new Config(path);
         assertThatThrownBy(config::load)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("Missing a value in the line");
+                .hasMessageContaining("Missing a value in a line");
     }
 
     @Test
