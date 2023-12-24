@@ -27,18 +27,24 @@ public class Config {
     }
 
     private void addValue(String content) throws IllegalArgumentException {
-        if (!content.contains("=")) {
-            throw new IllegalArgumentException("Missing equals in the line");
-        }
+        isCorrect(content);
         int indexOfEquals = content.indexOf("=");
         String key = content.substring(0, indexOfEquals);
         String value = content.substring(indexOfEquals + 1);
-        if (key.isEmpty()) {
+        values.put(key, value);
+    }
+
+    private void isCorrect(String content) {
+        String[] split = content.split("=");
+        if (!content.contains("=")) {
+            throw new IllegalArgumentException("Missing equals in the line");
+        }
+        if (split[0].isEmpty()) {
             throw new IllegalArgumentException("Missing a key in the line");
-        } else if (value.isEmpty()) {
+        }
+        if (split[1].isEmpty() && split.length == 2) {
             throw new IllegalArgumentException("Missing a value in the line");
         }
-        values.put(key, value);
     }
 
     public String value(String key) {
