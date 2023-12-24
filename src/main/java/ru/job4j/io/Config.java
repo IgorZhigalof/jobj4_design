@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 public class Config {
-
     private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
 
