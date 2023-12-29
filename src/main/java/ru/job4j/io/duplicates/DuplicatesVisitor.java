@@ -16,11 +16,13 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty property = new FileProperty(
                 file.toFile().getUsableSpace(),
                 file.toFile().getName());
-        if (files.containsKey(property)) {
-            files.get(property).add(file.toAbsolutePath());
-        } else {
-            files.put(property, new ArrayList<>(List.of(file.toAbsolutePath())));
-        }
+        files.computeIfAbsent(property,
+                x -> new ArrayList<>(
+                        List.of(
+                                file.toAbsolutePath()
+                        )
+                )
+        ).add(file.toAbsolutePath());
         return super.visitFile(file, attributes);
     }
 
