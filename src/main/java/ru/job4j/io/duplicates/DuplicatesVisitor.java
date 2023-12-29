@@ -16,13 +16,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         FileProperty property = new FileProperty(
                 file.toFile().getUsableSpace(),
                 file.toFile().getName());
-        files.computeIfAbsent(property,
-                x -> new ArrayList<>(
-                        List.of(
-                                file.toAbsolutePath()
-                        )
-                )
-        ).add(file.toAbsolutePath());
+        files.computeIfAbsent(property, x -> new ArrayList<>()).add(file.toAbsolutePath());
         return super.visitFile(file, attributes);
     }
 
