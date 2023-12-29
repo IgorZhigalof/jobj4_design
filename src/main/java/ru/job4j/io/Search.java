@@ -35,7 +35,7 @@ public class Search {
         if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("Second argument must starts with a dot");
         }
-        if (!(args[1].length() > 1)) {
+        if (args[1].length() == 1) {
             throw new IllegalArgumentException("Second argument must contain 2 or more characters");
         }
     }
