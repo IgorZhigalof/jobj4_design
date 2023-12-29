@@ -22,14 +22,8 @@ public class Search {
     }
 
     private static void validate(String[] args) {
-        if (args.length == 0) {
+        if (args.length < 2) {
             throw new IllegalArgumentException("Missing arguments");
-        }
-        if (args[0].isBlank()) {
-            throw new IllegalArgumentException("Invalid first argument");
-        }
-        if (args[1].isBlank()) {
-            throw new IllegalArgumentException("Invalid second argument");
         }
         File file = new File(args[0]);
         if (!file.exists()) {
@@ -37,6 +31,12 @@ public class Search {
         }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("Second argument must starts with a dot");
+        }
+        if (!(args[1].length() > 1)) {
+            throw new IllegalArgumentException("Second argument must contain 2 or more characters");
         }
     }
 }
