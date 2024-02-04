@@ -1,43 +1,55 @@
 package ru.job4j.io;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws IOException {
-        Scanner scanner = new Scanner(new File(argsName.get("path")));
-        if (!scanner.hasNextLine()) {
-            throw new IOException("The file is empty");
-        }
-        String[] columns = scanner.nextLine().split(argsName.get("delimiter"));
-        ArrayList<Integer> numbersOfNecessaryColumns = getNumbersOfColumns(
-                                                    columns,
-                                                    argsName.get("filter")
-        );
-        while (scanner.hasNextLine()) {
-            String[] line = scanner.nextLine().split(argsName.get("delimiter"), -1);
-            if (line.length < columns.length) {
-                throw new IOException("Missing field in: " + String.join(" ", line));
+        try (Scanner scanner = new Scanner(new File(argsName.get("path")));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(argsName.get("out"), true))) {
+            String[] columns = scanner
+                    .nextLine()
+                    .split(argsName.get("delimiter"));
+            ArrayList<Integer> necessaryColumns = getNumbersOfColumns(
+                    columns,
+                    argsName.get("filter")
+            );
+            String firstLineToWrite = necessaryColumns
+                    .stream()
+                    .map(x -> columns[x])
+                    .collect(Collectors.joining(argsName.get("delimiter")));
+            writer.write(firstLineToWrite + System.lineSeparator());
+            while (scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().split(argsName.get("delimiter"), -1);
+                String toWrite = necessaryColumns
+                        .stream()
+                        .map(x -> line[x])
+                        .collect(Collectors.joining(argsName.get("delimiter")));
+                writer.write(toWrite + System.lineSeparator());
             }
-            numbersOfNecessaryColumns.forEach(x -> System.out.print(line[x] + " "));
-            System.out.println();
+        } catch (IOException e) {
+            throw e;
         }
     }
 
     private static ArrayList<Integer> getNumbersOfColumns(String[] columns, String rawParams) throws IOException {
         String[] params = rawParams.split(",");
         ArrayList<Integer> numbersOfColumns = new ArrayList<>();
-        for (int i = 0; i < columns.length; i++) {
-            for (String param : params) {
+        for (String param : params) {
+            for (int i = 0; i < columns.length; i++) {
                 if (columns[i].equals(param)) {
                     numbersOfColumns.add(i);
                 }
             }
+
         }
         if (numbersOfColumns.isEmpty()) {
             throw new IOException("There are no columns matching the filter");
