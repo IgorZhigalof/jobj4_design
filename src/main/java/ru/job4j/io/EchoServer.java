@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
@@ -14,15 +13,18 @@ public class EchoServer {
                 try (OutputStream output = socket.getOutputStream();
                      BufferedReader input = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     ArrayList<String> content = new ArrayList<>();
                     for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
                         content.add(string);
-                        System.out.println(string);
                     }
-                    Pattern pattern = Pattern.compile("Bye HTTP");
-                    if (pattern.matcher(content.get(0)).find()) {
-                        server.close();
+                    String line = content.get(0);
+                    int start = line.indexOf("msg=") + 4;
+                    int end = line.indexOf(" HTTP/");
+                    String message = line.substring(start, end);
+                    switch (message) {
+                        case "Exit" -> server.close();
+                        case "Hello" -> output.write(("HTTP/1.1 200 OK\r\n\r\n" + "Hello").getBytes());
+                        default -> output.write(("HTTP/1.1 200 OK\r\n\r\n" + "What").getBytes());
                     }
                     output.flush();
                 }
