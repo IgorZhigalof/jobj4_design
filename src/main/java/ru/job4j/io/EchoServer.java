@@ -13,6 +13,7 @@ public class EchoServer {
                 try (OutputStream output = socket.getOutputStream();
                      BufferedReader input = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
+                    output.write(("HTTP/1.1 200 OK\r\n\r\n").getBytes());
                     ArrayList<String> content = new ArrayList<>();
                     for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
                         content.add(string);
@@ -23,7 +24,7 @@ public class EchoServer {
                     String message = line.substring(start, end);
                     switch (message) {
                         case "Exit" -> server.close();
-                        case "Hello" -> output.write(("HTTP/1.1 200 OK\r\n\r\n" + "Hello").getBytes());
+                        case "Hello" -> output.write("Hello".getBytes());
                         default -> output.write(("HTTP/1.1 200 OK\r\n\r\n" + "What").getBytes());
                     }
                     output.flush();
