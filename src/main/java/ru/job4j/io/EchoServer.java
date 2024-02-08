@@ -25,7 +25,7 @@ public class EchoServer {
                     switch (message) {
                         case "Exit" -> server.close();
                         case "Hello" -> output.write("Hello".getBytes());
-                        default -> output.write(("HTTP/1.1 200 OK\r\n\r\n" + "What").getBytes());
+                        default -> output.write("What".getBytes());
                     }
                     output.flush();
                 }
