@@ -9,13 +9,13 @@ public class UsageLog4j {
 
     public static void main(String[] args) {
         boolean first = true;
-        String second = "1";
-        byte third = 2;
-        short fourth = 3;
-        int fifth = 4;
-        long sixth = 5L;
-        float seventh = 6F;
-        double eighth = 7;
+        String second = "2";
+        byte third = 3;
+        short fourth = 4;
+        int fifth = 5;
+        long sixth = 6L;
+        float seventh = 7F;
+        double eighth = 8;
         LOG.debug("first: {}, second: {}, third: {}, fourth: {}, fifth: {}, sixth: {}, seventh: {}, eighth: {}",
                 first, second, third, fourth, fifth, sixth, seventh, eighth
                 );
