@@ -9,7 +9,7 @@ public class UsageLog4j {
 
     public static void main(String[] args) {
         boolean first = true;
-        String second = "2";
+        char second = '2';
         byte third = 3;
         short fourth = 4;
         int fifth = 5;
