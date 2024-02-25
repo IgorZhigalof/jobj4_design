@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<lion isAdult="true" age="20">
+    <breed>breed</breed>
+    <sound>Roar</sound>
+    <offspring>
+        <descendant>first</descendant>
+        <descendant>second</descendant>
+    </offspring>
+</lion>
