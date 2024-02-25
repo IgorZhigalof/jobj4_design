@@ -28,6 +28,26 @@ public class Lion {
         this.sound = sound;
     }
 
+    public boolean isAdult() {
+        return isAdult;
+    }
+
+    public byte getAge() {
+        return age;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public Sound getSound() {
+        return sound;
+    }
+
+    public String[] getOffspring() {
+        return offspring;
+    }
+
     @Override
     public String toString() {
         return "Lion{"

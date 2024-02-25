@@ -10,6 +10,10 @@ public class Sound {
 
     public Sound() { }
 
+    public String getSound() {
+        return sound;
+    }
+
     public void sound() {
         System.out.println(sound);
     }
